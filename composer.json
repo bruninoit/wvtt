@@ -1,0 +1,37 @@
+{
+"name": "bruninoit/wvtt",
+"type": "phpbb-extension",
+"description": "Conversion of the Alors MOD which shows the users who have visited a topic and the times they have visited",
+"homepage": "https://github.com/bruninoit/wvtt",
+"version": "0.1.0-a1",
+"time": "2015-02-11",
+"license": "GPL-2.0",
+"authors": [
+{
+"name": "brunino",
+"email": "brunino@altervista.org",
+"homepage": "http://www.brunino.altervista.org",
+"role": "Developer"
+},
+{
+"name": "Alors",
+"email": "",
+"homepage": "",
+"role": "Previous Developer"
+}
+],
+"require": {
+"php": ">=5.3"
+},
+"extra": {
+"display-name": "Who Visited This Topic",
+"soft-require": {
+"phpbb/phpbb": "3.1.*@dev"
+},
+"version-check": {
+"host": "brunino.altervista.org",
+"directory": "/version/",
+"filename": "wvtt.json"
+}
+}
+}
