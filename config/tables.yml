@@ -1,0 +1,2 @@
+parameters:
+    phpbb.pages.tables.wvtt: %core.table_prefix%wvtt
