@@ -6,5 +6,6 @@ services:
             - @template
             - @db
             - @user
+            - %bruninoit.wvtt.tables.wvtt%
         tags:
             - { name: event.listener }
