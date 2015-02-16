@@ -1,0 +1,10 @@
+services:
+    bruninoit.wvtt.listener:
+        class: bruninoit\wvtt\event\main_listener
+        arguments:
+            - @controller.helper
+            - @template
+            - @db
+            - @user
+        tags:
+            - { name: event.listener }
