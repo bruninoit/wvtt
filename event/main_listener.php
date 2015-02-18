@@ -20,9 +20,8 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'						=> 'load_language_on_setup',
-			'core.viewtopic_assign_template_vars_before'						=> 'viewtopic_add',
-			'core.viewtopic_get_post_data' => 'viewtopic_list'
-		);
+			'core.viewtopic_assign_template_vars_before'			=> 'viewtopic_add',
+			'core.viewtopic_get_post_data'					=> 'viewtopic_list'		);
 	}
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -52,35 +51,39 @@ class main_listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
-			'ext_name' => 'staffit/banlist',
+			'ext_name' => 'bruninoit/wvtt',
 			'lang_set' => 'common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 	public function viewtopic_add($event)
 	{
-		$this->template->assign_vars(array(
-			'U_BANLIST_PAGE'	=> $this->helper->route('staffit_banlist_controller'),
-			));
+//query aggiunta
 	}
 	
 	public function viewtopic_list($event)
 	{
-	$topic_id=1;
-	$query = "SELECT *
-    FROM " . $this->wvtt_table . "
-    WHERE topic_id = " . $topic_id . "";
+	$topic_id=$event['topic_id'];
+	$query = "SELECT w.*, u.*
+	 FROM " . $this->wvtt_table . " w, " . USER_TABLE . " u
+	 WHERE w.topic_id = " . $topic_id . "
+	 AND w.user_id=u.user_id
+	 GROUP BY w.user_id";
   $list_query = $this->db->sql_query($query);
   while ($list = $this->db->sql_fetchrow($list_query))
     {
+    	$username = $list['username'];
+    	$user_id = $list['user_id'];
+    	$cont = "SELECT COUNT(user_id) AS total
+    	FROM " . $this->wvtt_table . "
+    	WHERE  topic_id = " . $topic_id . "
+    	AND  user_id = " . $user_id . "";
+    	$result = $this->db->sql_query($cont);
+    	$visits = (int) $this->db->sql_fetchfield('total');
      $this->template->assign_block_vars('wvtt_list',array(
-	'LAST_TOPIC_LINK'			=> $last_topic_link[$x],
+	'USERNAME'			=> $username,
+	'VISITS'			=> $visits
 	));
     }
-    
-    
-		$this->template->assign_vars(array(
-			'U_BANLIST_PAGE'	=> $this->helper->route('staffit_banlist_controller'),
-			));
 	}
 }
