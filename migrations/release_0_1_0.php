@@ -11,20 +11,21 @@ class release_0_1_0 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['toptentopics_forum']);
+		return isset($this->config['asd']);
 	}
 	static public function depends_on()
 	{
 		return array('\phpbb\db\migration\data\v310\alpha2');
 	}
-	public function update_data()
+	
+public function update_data()
 	{
     return array(
         'add_tables' => [
             $this->table_prefix . 'wvtt' => [
                 'COLUMNS' => [
-                    'user_id'        => ['VCHAR', ''],
-                    'topic_id'        => ['MTEXT', ''],
+                    'user_id'        => ['INT', ''],
+                    'topic_id'        => ['INT', ''],
                 ],
             ],
         ],
@@ -39,8 +40,4 @@ public function revert_schema()
         ],
     );
 }
- 
-			)),
-		);
-	}
 }
