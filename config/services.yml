@@ -7,5 +7,7 @@ services:
             - @db
             - @user
             - %bruninoit.wvtt.tables.wvtt%
+            - %core.root_path%
+            - %core.php_ext%
         tags:
             - { name: event.listener }
