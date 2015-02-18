@@ -32,6 +32,8 @@ class main_listener implements EventSubscriberInterface
 	/** @var \phpbb\user */
 	protected $user;
 	protected $wvtt_table;
+	protected $root_path;
+	protected $phpEx;
 	
 	/**
 	* Constructor
@@ -39,13 +41,15 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $wvtt_table)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $wvtt_table, $root_path, $phpEx)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->db = $db;
 		$this->user = $user;
 		$this->wvtt_table = $wvtt_table;
+		$this->root_path = $root_path;
+		$this->phpEx   = $phpEx ;
 	}
 	public function load_language_on_setup($event)
 	{
@@ -80,9 +84,11 @@ class main_listener implements EventSubscriberInterface
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
+    	$url = "{$this->root_path}memberlist.{$this->root_path}?mode=viewprofile{$this->phpEx}&u={$user_id}";
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
-	'VISITS'			=> $visits
+	'VISITS'			=> $visits,
+	'URL'				=> $url
 	));
     }
 	}
