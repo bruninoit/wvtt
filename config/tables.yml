@@ -1,2 +1,2 @@
 parameters:
-    phpbb.pages.tables.wvtt: %core.table_prefix%wvtt
+    bruninoit.wvtt.tables.wvtt: %core.table_prefix%wvtt
