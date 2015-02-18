@@ -6,38 +6,29 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2 
 * 
 */ 
-namespace staffit\toptentopics\migrations;
+namespace bruninoit\wvtt\migrations;
 class release_0_1_0 extends \phpbb\db\migration\migration
 {
-	public function effectively_installed()
-	{
-		return isset($this->config['asd']);
-	}
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v310\alpha2');
+		return array('\phpbb\db\migration\data\v310\gold');
 	}
-	
-public function update_data()
+	public function update_schema()
 	{
-    return array(
-        'add_tables' => [
-            $this->table_prefix . 'wvtt' => [
-                'COLUMNS' => [
-                    'user_id'        => ['INT', ''],
-                    'topic_id'        => ['INT', ''],
-                ],
-            ],
-        ],
-    );
+return array(
+			'add_tables'	=> array(
+				$this->table_prefix . 'wvtt'	=> array(
+					'COLUMNS'	=> array(
+						'user_id'						=> array('UINT', null),
+						'topic_id'						=> array('UINT', null),
+					),
+				),
+			),
+		);
+
+
+
 }
 
-public function revert_schema()
-{
-    return array(
-        'drop_tables' => [
-            $this->table_prefix . 'wvtt',
-        ],
-    );
-}
+
 }
