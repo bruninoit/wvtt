@@ -93,7 +93,7 @@ class main_listener implements EventSubscriberInterface
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
-    	$url = "{$this->root_path}memberlist.{$this->root_path}?mode=viewprofile{$this->phpEx}&u={$user_id}";
+    	$url = "{$this->root_path}memberlist.{$this->phpEx}?mode=viewprofile&u={$user_id}";
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
 	'VISITS'			=> $visits,
