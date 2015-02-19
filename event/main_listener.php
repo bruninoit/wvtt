@@ -20,8 +20,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'						=> 'load_language_on_setup',
-			'core.viewtopic_assign_template_vars_before'			=> 'viewtopic_add',
-			'core.viewtopic_get_post_data'					=> 'viewtopic_list'		);
+			'core.viewtopic_get_post_data'					=> 'viewtopic_actions'		);
 	}
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -41,7 +40,7 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $wvtt_table, $root_path, $phpEx)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
@@ -49,7 +48,7 @@ class main_listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->wvtt_table = $wvtt_table;
 		$this->root_path = $root_path;
-		$this->phpEx   = $phpEx ;
+		$this->phpEx   = $phpEx;
 	}
 	public function load_language_on_setup($event)
 	{
@@ -60,16 +59,26 @@ class main_listener implements EventSubscriberInterface
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
-	public function viewtopic_add($event)
+	public function viewtopic_actions($event)
 	{
-//query aggiunta
-	}
-	
-	public function viewtopic_list($event)
-	{
-	$topic_id=$event['topic_id'];
-	$query = "SELECT w.*, u.*
-	 FROM " . $this->wvtt_table . " w, " . USER_TABLE . " u
+    $topic_id=$event['topic_id'];
+    $user_id=$this->user->data['user_id'];
+    
+    //query insert
+    if(is_numeric($user_id))
+      	{
+    	$sql_arr = array(
+    	'user_id'    => $user_id,
+    	'topic_id'        => $topic_id
+		);
+		$sql_insert = 'INSERT INTO ' . $this->wvtt_table . ' ' . $this->db->sql_build_array('INSERT', $sql_arr);
+		$this->db->sql_query($sql_insert);
+		}
+    
+    
+    //list
+    $query = "SELECT w.*, u.*
+	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
 	 AND w.user_id=u.user_id
 	 GROUP BY w.user_id";
@@ -91,5 +100,6 @@ class main_listener implements EventSubscriberInterface
 	'URL'				=> $url
 	));
     }
-	}
+   
+    }
 }
