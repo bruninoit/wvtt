@@ -65,7 +65,7 @@ class main_listener implements EventSubscriberInterface
     $user_id=$this->user->data['user_id'];
     
     //query insert
-    if(is_numeric($user_id))
+    if($user_id=!1)
       	{
     	$sql_arr = array(
     	'user_id'    => $user_id,
@@ -81,7 +81,8 @@ class main_listener implements EventSubscriberInterface
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
 	 AND w.user_id=u.user_id
-	 GROUP BY w.user_id";
+	 GROUP BY w.user_id
+	 ORDER BY w.user_id";
   $list_query = $this->db->sql_query($query);
   while ($list = $this->db->sql_fetchrow($list_query))
     {
