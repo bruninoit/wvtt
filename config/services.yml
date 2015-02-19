@@ -1,13 +1,15 @@
+imports:
+    - { resource: tables.yml }
 services:
     bruninoit.wvtt.listener:
         class: bruninoit\wvtt\event\main_listener
         arguments:
             - @controller.helper
             - @template
-            - @db
+            - @dbal.conn
             - @user
-            - %bruninoit.wvtt.tables.wvtt%
             - %core.root_path%
             - %core.php_ext%
+            - %bruninoit.wvtt.tables.wvtt%
         tags:
             - { name: event.listener }
