@@ -65,7 +65,7 @@ class main_listener implements EventSubscriberInterface
     $user_id=$this->user->data['user_id'];
     
     //query insert
-    if($user_id=!=1)
+    if($user_id!=1)
       	{
     	$sql_arr = array(
     	'user_id'    => $user_id,
