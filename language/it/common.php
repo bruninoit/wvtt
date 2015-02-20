@@ -1,7 +1,7 @@
 <?php
 /** 
 * 
-* @package StaffIt - Top Ten Topics 
+* @package Who Visit This Topic
 * @copyright (c) 2014 brunino
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2 
 * 
