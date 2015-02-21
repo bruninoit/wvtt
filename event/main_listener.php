@@ -67,9 +67,11 @@ class main_listener implements EventSubscriberInterface
     //query insert
     if($user_id!=1)
       	{
+      	$date=time();
     	$sql_arr = array(
     	'user_id'    => $user_id,
-    	'topic_id'        => $topic_id
+    	'topic_id'        => $topic_id,
+    	'date'	=> $date
 		);
 		$sql_insert = 'INSERT INTO ' . $this->wvtt_table . ' ' . $this->db->sql_build_array('INSERT', $sql_arr);
 		$this->db->sql_query($sql_insert);
@@ -88,6 +90,7 @@ class main_listener implements EventSubscriberInterface
     {
     	$username = $list['username'];
     	$user_id = $list['user_id'];
+    	$date = $list['date'];
     	$cont = "SELECT COUNT(user_id) AS total
     	FROM " . $this->wvtt_table . "
     	WHERE  topic_id = " . $topic_id . "
@@ -98,7 +101,8 @@ class main_listener implements EventSubscriberInterface
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
 	'VISITS'			=> $visits,
-	'URL'				=> $url
+	'URL'				=> $url,
+	'DATE'				=> $date
 	));
     }
    
