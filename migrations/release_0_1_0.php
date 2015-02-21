@@ -21,7 +21,6 @@ return array(
 					'COLUMNS'	=> array(
 						'user_id'						=> array('UINT', null),
 						'topic_id'						=> array('UINT', null),
-						'date'							=> array('UINT', null),
 					),
 				),
 			),
