@@ -18,7 +18,7 @@ public function update_schema()
     return array(
         'add_columns'        => array(
             $this->table_prefix . 'wvtt'        => array(
-                'date'    => array('UINT', 0, 'after' => 'topic_id'),
+                'date'    => array('UINT:15', 0, 'after' => 'topic_id'),
             )
         ),
     );
