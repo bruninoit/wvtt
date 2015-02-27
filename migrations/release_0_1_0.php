@@ -26,7 +26,20 @@ return array(
 			),
 		);
 
-}
-
+        }
+	public function revert_schema()
+	{
+		return array(
+			'drop_columns' => array(
+				$this->table_prefix . 'wvtt'	=> array(
+					'user_id',
+					'topic_id',
+				),
+			),
+			'drop_tables' => array(
+				$this->table_prefix . 'wvtt',
+			),
+		);
+	}
 
 }
