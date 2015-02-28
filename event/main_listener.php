@@ -35,6 +35,8 @@ class main_listener implements EventSubscriberInterface
 	protected $wvtt_table;
 	protected $root_path;
 	protected $phpEx;
+	/** @var \phpbb\auth\auth */
+	protected $auth;
 	
 	/**
 	* Constructor
@@ -42,8 +44,7 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table)
-	{
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table, \phpbb\auth\auth $auth)	{
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->db = $db;
@@ -51,6 +52,7 @@ class main_listener implements EventSubscriberInterface
 		$this->wvtt_table = $wvtt_table;
 		$this->root_path = $root_path;
 		$this->phpEx   = $phpEx;
+		$this->auth = $auth;
 	}
 	
 	public function permission_wvtt($event)
@@ -89,6 +91,8 @@ class main_listener implements EventSubscriberInterface
     
     
     //list
+	   if ($this->auth->acl_get('u_wvtt'))
+		{
     $query = "SELECT w.*, u.*
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
@@ -99,8 +103,7 @@ class main_listener implements EventSubscriberInterface
   while ($list = $this->db->sql_fetchrow($list_query))
     {
     	$username = $list['username'];
-		$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
-		
+	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
     	$date = $list['date'];
     	$cont = "SELECT COUNT(user_id) AS total
@@ -118,7 +121,7 @@ class main_listener implements EventSubscriberInterface
 	'DATE'				=> $date
 	));
     }
-   
+		} //permission
     }
 }
 
