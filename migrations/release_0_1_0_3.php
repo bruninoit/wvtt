@@ -15,7 +15,7 @@ class release_0_1_0_3 extends \phpbb\db\migration\migration
 	}
 	public function update_schema()
 	{
-	return array(
+	return array(b
 	array('permission.add', array('u_wvtt')),
 	array('permission.permission_set', array('REGISTERED', 'u_wvtt', 'group')),
 	array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_wvtt')),
