@@ -20,7 +20,9 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'						=> 'load_language_on_setup',
-			'core.viewtopic_get_post_data'					=> 'viewtopic_actions'		);
+			'core.viewtopic_get_post_data'					=> 'viewtopic_actions',
+			'core.permissions'						=> 'permission_wvtt'
+			);
 	}
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -50,6 +52,14 @@ class main_listener implements EventSubscriberInterface
 		$this->root_path = $root_path;
 		$this->phpEx   = $phpEx;
 	}
+	
+	public function permission_wvtt($event)
+	{
+	$permissions = $event['permissions'];
+	$permissions['u_wvtt'] = array('lang' => 'ACL_WVTT_VIEW', 'cat' => 'misc');
+	$event['permissions'] = $permissions;
+	}
+	
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
