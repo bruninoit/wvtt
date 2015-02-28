@@ -7,7 +7,7 @@
 * 
 */ 
 namespace bruninoit\wvtt\migrations;
-class release_0_1_0_3 extends \phpbb\db\migration\migration
+class release_0_1_0_4 extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
