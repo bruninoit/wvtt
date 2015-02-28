@@ -89,6 +89,8 @@ class main_listener implements EventSubscriberInterface
   while ($list = $this->db->sql_fetchrow($list_query))
     {
     	$username = $list['username'];
+		$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
+		
     	$user_id = $list['user_id'];
     	$date = $list['date'];
     	$cont = "SELECT COUNT(user_id) AS total
@@ -100,6 +102,7 @@ class main_listener implements EventSubscriberInterface
     	$url = "{$this->root_path}memberlist.{$this->phpEx}?mode=viewprofile&u={$user_id}";
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
+	'USERNAME_COLOUR'	        => $user_colour,
 	'VISITS'			=> $visits,
 	'URL'				=> $url,
 	'DATE'				=> $date
@@ -108,3 +111,4 @@ class main_listener implements EventSubscriberInterface
    
     }
 }
+
