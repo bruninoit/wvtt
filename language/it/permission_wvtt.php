@@ -34,5 +34,5 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 //
 $lang = array_merge($lang, array(
-	'ACL_WVTT_VIEW'		=> 'Può vedere Chi Ha Visto un Topic',
+	'ACL_U_WVTT'		=> 'Può vedere Chi Ha Visto un Topic',
 ));
