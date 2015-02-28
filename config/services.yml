@@ -11,5 +11,6 @@ services:
             - %core.root_path%
             - %core.php_ext%
             - %bruninoit.wvtt.tables.wvtt%
+            - @auth
         tags:
             - { name: event.listener }
