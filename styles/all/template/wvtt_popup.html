@@ -1,14 +1,12 @@
 <!-- INCLUDE simple_header.html -->
 <!-- IF PERMISSION_VIEW -->
-<h3>{L_WVTT_TITLE}</h3>
-
 <div class="forumbg">
     <div class="inner"><span class="corners-top"><span></span></span>
 
         <table class="table1" cellspacing="1">
             <thead>
                 <tr>
-                    <th class="info" "{wvtt_list.USERNAME_COLOUR}">{L_USERNAME}</th>
+                    <th class="info">{L_USERNAME}</th>
                     <th class="active">{L_VIEWS}</th>
                     <th class="info">{L_LAST_VISIT}</th>
                 </tr>
@@ -16,7 +14,7 @@
             <tbody>
                 <!-- BEGIN wvtt_list -->
                 <tr class="bg1">
-                    <td class="info">{vwvtt_list.USERNAME}</td>
+                    <td class="info" "{wvtt_list.USERNAME_COLOUR}">{wvvtt_list.USERNAME}</td>
                     <td class="active">{wvtt_list.VISITS}</td>
                     <td class="info">{wvtt_list.DATE}</td>
                 </tr>
