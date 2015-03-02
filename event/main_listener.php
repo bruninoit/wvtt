@@ -88,8 +88,6 @@ class main_listener implements EventSubscriberInterface
     
     
     //list
-	   if ($this->auth->acl_get('u_wvtt'))
-		{
     $query = "SELECT w.*, u.*
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
@@ -117,8 +115,13 @@ class main_listener implements EventSubscriberInterface
 	'URL'				=> $url,
 	'DATE'				=> $date
 	));
+	if ($this->auth->acl_get('u_wvtt'))
+		{
+		$this->template->assign_var('PERMISSION_VIEW', true);
+		}
+	$url_popup={$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}
+	$this->template->assign_var('URL_POPUP', $url_popup);
     }
-		} //permission
     }
 }
 
