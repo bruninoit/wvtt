@@ -13,7 +13,7 @@ class release_0_1_0_b1 extends \phpbb\db\migration\migration
 	{
 		return array('\phpbb\db\migration\data\v310\gold');
 	}
-	public function update_schema()
+	public function update_data()
 	{
 	return array(
 	array('permission.add', array('u_wvtt'), true),
