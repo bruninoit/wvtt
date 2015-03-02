@@ -24,8 +24,6 @@ class main_listener implements EventSubscriberInterface
 			'core.permissions'						=> 'permission_wvtt'
 			);
 	}
-	/* @var \phpbb\controller\helper */
-	protected $helper;
 	/* @var \phpbb\template\template */
 	protected $template;
 	/** @var \phpbb\db\driver\driver_interface */
@@ -44,8 +42,7 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table, \phpbb\auth\auth $auth)	{
-		$this->helper = $helper;
+	public function __construct(\phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table, \phpbb\auth\auth $auth)	{
 		$this->template = $template;
 		$this->db = $db;
 		$this->user = $user;
