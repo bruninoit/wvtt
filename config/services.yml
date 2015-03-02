@@ -9,6 +9,7 @@ services:
             - %bruninoit.wvtt.tables.wvtt%
             - @auth
             - @user
+            - @controller.helper
     bruninoit.wvtt.listener:
         class: bruninoit\wvtt\event\main_listener
         arguments:
