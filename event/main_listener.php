@@ -115,7 +115,7 @@ class main_listener implements EventSubscriberInterface
 	'URL'				=> $url,
 	'DATE'				=> $date
 	));
-	if ($this->auth->acl_get('u_wvtt'))
+	if($this->auth->acl_get('u_wvtt'))
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
 		}
