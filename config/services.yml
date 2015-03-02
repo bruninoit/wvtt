@@ -2,6 +2,14 @@ imports:
     - { resource: tables.yml }
 services:
     bruninoit.wvtt.listener:
+        class: bruninoit\wvtt\controller\main
+        arguments:
+            - @template
+            - @dbal.conn
+            - %bruninoit.wvtt.tables.wvtt%
+            - @auth
+            - @user
+    bruninoit.wvtt.listener:
         class: bruninoit\wvtt\event\main_listener
         arguments:
             - @template
