@@ -119,7 +119,7 @@ class main_listener implements EventSubscriberInterface
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
 		}
-	$url_popup={$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}
+	$url_popup="{$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}";
 	$this->template->assign_var('URL_POPUP', $url_popup);
     }
     }
