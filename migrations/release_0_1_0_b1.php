@@ -16,7 +16,7 @@ class release_0_1_0_b1 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 	return array(
-	array('permission.add', array('u_wvtt'), true),
+	array('permission.add', array('u_wvtt', true)),
 	array('permission.permission_set', array('REGISTERED', 'u_wvtt', 'group', true)),
 	array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_wvtt', 'rule', true)),
   );
