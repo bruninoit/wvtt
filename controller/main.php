@@ -14,19 +14,23 @@ class main
 	protected $db;
 	protected $wvtt_table;
 	protected $user;
+    protected $helper;
 
-	public function __construct(\phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, $wvtt_table, \phpbb\auth\auth $auth, \phpbb\user $user)	{
+	public function __construct(\phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, $wvtt_table, \phpbb\auth\auth $auth, \phpbb\user $user, \phpbb\controller\helper $helper)
+    {
 		$this->template = $template;
 		$this->db = $db;
 		$this->wvtt_table = $wvtt_table;
 		$this->auth = $auth;
 		$this->user = $user;
-	
+        $this->helper = $helper;
+	}
+    
 	public function handle($topic_id)
 	{
   	$page_name=$this->user->lang['WVTT_TITLE'];
   	
-  	//content start
+    //content start
     $query = "SELECT w.*, u.*
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
@@ -34,9 +38,9 @@ class main
 	 GROUP BY w.user_id
 	 ORDER BY w.user_id";
   $list_query = $this->db->sql_query($query);
-  while ($list = $this->db->sql_fetchrow($list_query))
+  while($list = $this->db->sql_fetchrow($list_query))
     {
-    	$username = $list['username'];
+    $username = $list['username'];
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
     	$date = $list['date'];
@@ -46,12 +50,10 @@ class main
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
-    	$url = "{$this->root_path}memberlist.{$this->phpEx}?mode=viewprofile&u={$user_id}";
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
 	'USERNAME_COLOUR'	        => $user_colour,
 	'VISITS'			=> $visits,
-	'URL'				=> $url,
 	'DATE'				=> $date
 	));
     }
