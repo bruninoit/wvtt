@@ -16,5 +16,6 @@ if (empty($lang) || !is_array($lang))
 }
 $lang = array_merge($lang, array(
 	'WVTT_TITLE'			=> 'Who Visited This Topic',
-    'EXTENSION_BY'			=> 'Extension By',
+        'EXTENSION_BY'			=> 'Extension By',
+        'ACL_U_WVTT'		=> 'Can view Who Visited A Topic',
 ));
