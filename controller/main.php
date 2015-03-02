@@ -35,21 +35,30 @@ class main
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
 	 AND w.user_id=u.user_id
-	 GROUP BY w.user_id
-	 ORDER BY w.user_id";
+	 GROUP BY w.user_id";
   $list_query = $this->db->sql_query($query);
   while($list = $this->db->sql_fetchrow($list_query))
     {
     $username = $list['username'];
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
-    	$date = $list['date'];
     	$cont = "SELECT COUNT(user_id) AS total
     	FROM " . $this->wvtt_table . "
     	WHERE  topic_id = " . $topic_id . "
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
+        
+        $date = "SELECT date
+    	FROM " . $this->wvtt_table . "
+    	WHERE  topic_id = " . $topic_id . "
+    	AND  user_id = " . $user_id . "
+        ORDER BY date DESC";
+    	$date_query = $this->db->sql_query($date);
+    	$date_array = $this->db->sql_fetchrow($date_query);
+        $date = $date_array['date'];
+        $date = $this->user->format_date($date);
+        
      $this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
 	'USERNAME_COLOUR'	        => $user_colour,
