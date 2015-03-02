@@ -55,7 +55,10 @@ class main
 	'DATE'				=> $date
 	));
     }
-    
+	if($this->auth->acl_get('u_wvtt'))
+		{
+		$this->template->assign_var('PERMISSION_VIEW', true);
+		}
     //content end
   	
   	
