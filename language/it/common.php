@@ -15,6 +15,7 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 $lang = array_merge($lang, array(
-	'WVTT_TITLE'			=> 'Chi ha visto questo topic',
-    'EXTENSION_BY'			=> 'Estensione creata da',
+	    'WVTT_TITLE'			=> 'Chi ha visto questo topic',
+	    'EXTENSION_BY'			=> 'Estensione creata da',
+	    'ACL_U_WVTT'		=> 'Può vedere Chi Ha Visto un Topic',
 ));
