@@ -4,7 +4,6 @@ services:
     bruninoit.wvtt.listener:
         class: bruninoit\wvtt\event\main_listener
         arguments:
-            - @controller.helper
             - @template
             - @dbal.conn
             - @user
