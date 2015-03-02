@@ -1,7 +1,7 @@
 imports:
     - { resource: tables.yml }
 services:
-    bruninoit.wvtt.listener:
+    bruninoit.wvtt.controller:
         class: bruninoit\wvtt\controller\main
         arguments:
             - @template
