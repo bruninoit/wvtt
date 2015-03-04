@@ -137,6 +137,10 @@ class main_listener implements EventSubscriberInterface
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
 		}
+	if($this->auth->acl_get('u_wvtt_popup'))
+		{
+		$this->template->assign_var('PERMISSION_POPUP', true);
+		}
 	$url_popup="{$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}";
 	$this->template->assign_var('URL_POPUP', $url_popup);
     }
