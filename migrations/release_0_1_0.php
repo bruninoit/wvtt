@@ -21,7 +21,7 @@ return array(
 					'COLUMNS'	=> array(
 						'user_id'						=> array('UINT', null),
 						'topic_id'						=> array('UINT', null),
-						'date'							=> array('TIMESTAMP', null),
+						'date'							=> array('TIMESTAMP', 0),
 					),
 				),
 			),
