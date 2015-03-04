@@ -19,6 +19,7 @@ class release_0_1_0_b1 extends \phpbb\db\migration\migration
 	array('permission.add', array('u_wvtt', true)),
 	array('permission.permission_set', array('REGISTERED', 'u_wvtt', 'group', true)),
 	array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_wvtt', 'rule', true)),
+	array('permission.permission_set', array('ROLE_ADMIN_FULL', 'u_wvtt', 'rule', true)),
   );
 }
 }
