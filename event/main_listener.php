@@ -21,7 +21,8 @@ class main_listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewtopic_get_post_data'					=> 'viewtopic_actions',
-			'core.permissions'						=> 'permission_wvtt'
+			'core.permissions'						=> 'permission_wvtt',
+			'core.delete_user_after'					=> 'delete_user_view'
 			);
 	}
 	/* @var \phpbb\template\template */
@@ -51,7 +52,20 @@ class main_listener implements EventSubscriberInterface
 		$this->phpEx   = $phpEx;
 		$this->auth = $auth;
 	}
-	
+
+	public function delete_user_view($event)
+	{
+	$userid_array=$event['user_ids'];
+	$cont = count($userid_array);
+	for($i=0;$i<$conta;$i++)
+	{
+	$user_id=$userid_array[$i];
+	$sql = 'DELETE FROM ' . $this->wvtt_table . '
+	WHERE user_id = ' . $user_id . '';
+	$this->db->sql_query($sql);	
+	}
+	}
+
 	public function permission_wvtt($event)
 	{
 	$permissions = $event['permissions'];
