@@ -70,6 +70,7 @@ class main_listener implements EventSubscriberInterface
 	{
 	$permissions = $event['permissions'];
 	$permissions['u_wvtt'] = array('lang' => 'ACL_U_WVTT', 'cat' => 'misc');
+	$permissions['u_wvtt_popup'] = array('lang' => 'ACL_U_WVTT_POPUP', 'cat' => 'misc');
 	$event['permissions'] = $permissions;
 	}
 	
