@@ -31,6 +31,17 @@ class main
   	$page_name=$this->user->lang['WVTT_TITLE'];
   	
     //content start
+   //topic title
+    $topic_query = "SELECT topic_title
+	 FROM " . TOPICS_TABLE . "
+	 WHERE topic_id = " . $topic_id . "";
+   $topic_query_g = $this->db->sql_query($topic_query);
+   $topic_query_arr = $this->db->sql_fetchrow($topic_query_g);
+   $topic_title = $topic_query_arr['topic_title'];
+   $this->template->assign_var('TOPIC_TITLE', $topic_title);
+
+   
+   //list
     $query = "SELECT w.*, u.*
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
