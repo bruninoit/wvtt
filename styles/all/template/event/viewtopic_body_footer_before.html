@@ -1,6 +1,14 @@
 <!-- IF PERMISSION_VIEW -->
-<a href="{URL_POPUP}" onclick="window.open(this.href,'','statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=800,height=500'); return false;"><h3>{L_WVTT_TITLE}</h3></a>
+<!-- IF PERMISSION_POPUP -->
+<a href="{URL_POPUP}" onclick="window.open(this.href,'','statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=800,height=500'); return false;">
+<!-- ENDIF -->
+<h3>{L_WVTT_TITLE}</h3>
+<!-- IF PERMISSION_POPUP --></a><!-- ENDIF -->
 <p>
-<!-- BEGIN wvtt_list --><span><a href="{wvtt_list.URL}" "{wvtt_list.USERNAME_COLOUR}">{wvtt_list.USERNAME}</a></span> ({wvtt_list.VISITS}), <!-- END wvtt_list -->
+<!-- BEGIN wvtt_list -->
+<span>
+<a href="{wvtt_list.URL}" "{wvtt_list.USERNAME_COLOUR}">{wvtt_list.USERNAME}</a>
+</span> ({wvtt_list.VISITS}), 
+<!-- END wvtt_list -->
 </p>
 <!-- ENDIF -->
