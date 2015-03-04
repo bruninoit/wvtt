@@ -77,7 +77,7 @@ class main
 	'DATE'				=> $date
 	));
     }
-	if($this->auth->acl_get('u_wvtt'))
+	if($this->auth->acl_get('u_wvtt_popup'))
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
 		}
