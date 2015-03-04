@@ -102,6 +102,8 @@ class main_listener implements EventSubscriberInterface
     
     
     //list
+  if($this->auth->acl_get('u_wvtt'))
+    { //permission start
     $query = "SELECT w.*, u.*
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
@@ -129,6 +131,7 @@ class main_listener implements EventSubscriberInterface
 	'URL'				=> $url,
 	'DATE'				=> $date
 	));
+    }//permission end
 	if($this->auth->acl_get('u_wvtt'))
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
