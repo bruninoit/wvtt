@@ -27,7 +27,14 @@ return array(
 			),
 		);
 
-}
-
+	}
+	public function revert_schema()
+	{
+		return array(
+			'drop_tables'	=> array(
+				$this->table_prefix . 'wvtt'
+			),
+		);
+	}
 
 }
