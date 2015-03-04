@@ -18,4 +18,5 @@ $lang = array_merge($lang, array(
 	    'WVTT_TITLE'			=> 'Chi ha visto questo topic',
 	    'EXTENSION_BY'			=> 'Estensione creata da',
 	    'ACL_U_WVTT'		=> 'Può vedere Chi Ha Visto un Topic',
+	    'ACL_U_WVTT_POPUP'		=> 'Può vedere le date di visulazizzazione dei topic',
 ));
