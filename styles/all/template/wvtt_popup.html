@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     <th class="info">{L_USERNAME}</th>
-                    <th class="active">{L_VIEWS}</th>
+                    <!-- IF PERMISSION_COUNT --><th class="active">{L_VIEWS}</th><!-- ENDIF -->
                     <th class="info">{L_LAST_VISIT}</th>
                 </tr>
             </thead>
@@ -16,7 +16,7 @@
                 <!-- BEGIN wvtt_list -->
                 <tr class="bg1">
                     <td class="info" "{wvtt_list.USERNAME_COLOUR}">{wvtt_list.USERNAME}</td>
-                    <td class="active">{wvtt_list.VISITS}</td>
+                    <!-- IF PERMISSION_COUNT --><td class="active">{wvtt_list.VISITS}</td><!-- ENDIF -->
                     <td class="info">{wvtt_list.DATE}</td>
                 </tr>
                 <!-- END wvtt_list -->
