@@ -19,4 +19,5 @@ $lang = array_merge($lang, array(
 	    'EXTENSION_BY'			=> 'Estensione creata da',
 	    'ACL_U_WVTT'		=> 'Può vedere Chi Ha Visto un Topic',
 	    'ACL_U_WVTT_POPUP'		=> 'Può vedere le date di visulazizzazione dei topic',
+	    'ACL_U_WVTT_COUNT'		=> 'Può vedere il numero di visualizzazioni di un topic',
 ));
