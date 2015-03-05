@@ -64,7 +64,7 @@ class main
 	}else{
 	$visits = null;	
 	}
-	}
+   }
 	
         $date = "SELECT date
     	FROM " . $this->wvtt_table . "
@@ -82,7 +82,6 @@ class main
 	'VISITS'			=> $visits,
 	'DATE'				=> $date
 	));
-    }
 	if($this->auth->acl_get('u_wvtt_popup'))
 		{
 		$this->template->assign_var('PERMISSION_VIEW', true);
