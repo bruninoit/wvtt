@@ -19,4 +19,5 @@ $lang = array_merge($lang, array(
         'EXTENSION_BY'			=> 'Extension By',
         'ACL_U_WVTT'			=> 'Can view Who Visited A Topic',
         'ACL_U_WVTT_POPUP'		=> 'Can view the dates of who visited a topic',
+        'ACL_U_WVTT_COUNT'		=> 'Can view topics visits number for each user',
 ));
