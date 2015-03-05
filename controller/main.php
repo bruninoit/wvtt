@@ -61,6 +61,9 @@ class main
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
+	}else{
+	$visits = null;	
+	}
 	}
 	
         $date = "SELECT date
