@@ -71,6 +71,7 @@ class main_listener implements EventSubscriberInterface
 	$permissions = $event['permissions'];
 	$permissions['u_wvtt'] = array('lang' => 'ACL_U_WVTT', 'cat' => 'misc');
 	$permissions['u_wvtt_popup'] = array('lang' => 'ACL_U_WVTT_POPUP', 'cat' => 'misc');
+	$permissions['u_wvtt_count'] = array('lang' => 'ACL_U_WVTT_COUNT', 'cat' => 'misc');
 	$event['permissions'] = $permissions;
 	}
 	
@@ -118,14 +119,18 @@ class main_listener implements EventSubscriberInterface
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
     	$date = $list['date'];
+    	
+    if($this->auth->acl_get('u_wvtt_count'))
+	{
     	$cont = "SELECT COUNT(user_id) AS total
     	FROM " . $this->wvtt_table . "
     	WHERE  topic_id = " . $topic_id . "
     	AND  user_id = " . $user_id . "";
     	$result = $this->db->sql_query($cont);
     	$visits = (int) $this->db->sql_fetchfield('total');
+	}
     	$url = "{$this->root_path}memberlist.{$this->phpEx}?mode=viewprofile&u={$user_id}";
-     $this->template->assign_block_vars('wvtt_list',array(
+	$this->template->assign_block_vars('wvtt_list',array(
 	'USERNAME'			=> $username,
 	'USERNAME_COLOUR'	        => $user_colour,
 	'VISITS'			=> $visits,
@@ -140,6 +145,10 @@ class main_listener implements EventSubscriberInterface
 	if($this->auth->acl_get('u_wvtt_popup'))
 		{
 		$this->template->assign_var('PERMISSION_POPUP', true);
+		}
+	if($this->auth->acl_get('u_wvtt_count'))
+		{
+		$this->template->assign_var('PERMISSION_COUNT', true);
 		}
 	$url_popup="{$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}";
 	$this->template->assign_var('URL_POPUP', $url_popup);
