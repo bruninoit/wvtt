@@ -22,7 +22,8 @@ class main_listener implements EventSubscriberInterface
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.viewtopic_get_post_data'					=> 'viewtopic_actions',
 			'core.permissions'						=> 'permission_wvtt',
-			'core.delete_user_after'					=> 'delete_user_view'
+			'core.delete_user_after'					=> 'delete_user_view',
+			'core.memberlist_view_profile'					=> 'profile_list_wvtt'
 			);
 	}
 	/* @var \phpbb\template\template */
@@ -52,7 +53,38 @@ class main_listener implements EventSubscriberInterface
 		$this->phpEx   = $phpEx;
 		$this->auth = $auth;
 	}
-
+	public function profile_list_wvtt($event)
+	{
+	$user_id = $event['profile_fields']['user_id'];
+	if($this->auth->acl_get('u_wvtt_profile'))
+		{
+		$this->template->assign_var('PERMISSION_PROFILE', true);
+		//list last 5
+		$sql_list = "SELECT tt.topic_id, tt.topic_title
+	 	FROM " . FORUMS_TABLE . " ft, " . TOPICS_TABLE . " tt, " . $this->wvtt_table . " wvtt
+	 	WHERE tt.topic_moved_id = 0
+	 	AND tt.topic_visibility=1
+	 	AND wvtt.user_id=" . $user_id . "
+	 	AND wvtt.topic_id=tt.topic_id
+	 	AND ft.forum_id=tt.forum_id
+	 	ORDER BY wvtt.date DESC LIMIT 0,20
+	 	GROUP BY wvtt.topic_id";
+		$sql_list_query = $this->db->sql_query($sql_list);
+			while ($sql_list = $this->db->sql_fetchrow($sql_list_query))
+    			{
+    			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1)
+    			{
+			$this->template->assign_block_vars('wvtt_list',array(
+			'USERNAME'			=> $username,
+			'VISITS'			=> $visits,
+			'URL'				=> $url,
+			'DATE'				=> $date
+			));	
+    			}
+    			}
+		}
+		
+	}
 	public function delete_user_view($event)
 	{
 	$userid_array=$event['user_ids'];
