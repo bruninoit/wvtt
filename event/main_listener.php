@@ -58,29 +58,40 @@ class main_listener implements EventSubscriberInterface
 	$user_id = $event['profile_fields']['user_id'];
 	if($this->auth->acl_get('u_wvtt_profile'))
 		{
+		if($this->auth->acl_get('u_wvtt_popup'))
+			{
+			$this->template->assign_var('PERMISSION_POPUP', true);
+			}
 		$this->template->assign_var('PERMISSION_PROFILE', true);
 		//list last 5
-		$sql_list = "SELECT tt.topic_id, tt.topic_title
+		$sql_list = "SELECT tt.topic_id, tt.topic_title, wvtt.date
 	 	FROM " . FORUMS_TABLE . " ft, " . TOPICS_TABLE . " tt, " . $this->wvtt_table . " wvtt
 	 	WHERE tt.topic_moved_id = 0
 	 	AND tt.topic_visibility=1
 	 	AND wvtt.user_id=" . $user_id . "
 	 	AND wvtt.topic_id=tt.topic_id
 	 	AND ft.forum_id=tt.forum_id
-	 	ORDER BY wvtt.date DESC LIMIT 0,20
-	 	GROUP BY wvtt.topic_id";
+	 	GROUP BY wvtt.topic_id
+	 	ORDER BY wvtt.date DESC LIMIT 0,20";
 		$sql_list_query = $this->db->sql_query($sql_list);
 			while ($sql_list = $this->db->sql_fetchrow($sql_list_query))
     			{
     			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1)
     			{
+    			$true=true;
+    			}else{
+    			$true=false;
+    			}
+    			$topic_id = $sql_list['topic_id'];
+    			$topic_title = $sql_list['topic_title'];
+    			$url = "{$this->root_path}viewtopic.{$this->phpEx}?t={$topic_id}";
+    			$date = $this->user->format_date($sql_list['date']);
 			$this->template->assign_block_vars('wvtt_list',array(
-			'USERNAME'			=> $username,
-			'VISITS'			=> $visits,
+			'TRUE'				=> $true,
+			'TOPIC_TITLE'			=> $topic_title,
 			'URL'				=> $url,
 			'DATE'				=> $date
 			));	
-    			}
     			}
 		}
 		
@@ -152,6 +163,7 @@ class main_listener implements EventSubscriberInterface
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
     	$date = $list['date'];
+    	$date = $this->user->format_date($date);
     	
     if($this->auth->acl_get('u_wvtt_count'))
 	{
