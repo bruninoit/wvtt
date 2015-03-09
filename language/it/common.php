@@ -20,4 +20,5 @@ $lang = array_merge($lang, array(
 	    'ACL_U_WVTT'		=> 'Può vedere Chi Ha Visto un Topic',
 	    'ACL_U_WVTT_POPUP'		=> 'Può vedere le date di visulazizzazione dei topic',
 	    'ACL_U_WVTT_COUNT'		=> 'Può vedere il numero di visualizzazioni di un topic',
+	    'ACL_U_WVTT_PROFILE'		=> 'Può vedere gli ultimi topic visti da un utente (nei profili)'
 ));
