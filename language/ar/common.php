@@ -20,6 +20,6 @@ $lang = array_merge($lang, array(
         'EXTENSION_BY'			=> 'الإضافة بواسطة ',
         'ACL_U_WVTT'		=> 'يستطيع مُشاهدة الإضافة : من قرأ هذا الموضوع',
 	'ACL_U_WVTT_POPUP'		=> 'Can view the dates of who visited a topic', 
- 	'ACL_U_WVTT_COUNT'		=> 'Can view topics visits number for each user', 
-
+ 	'ACL_U_WVTT_COUNT'		=> 'Can view topics visits number for each user',
+ 	'ACL_U_WVTT_PROFILE'		=> 'Can view last topics visited by users (in profiles)'
 ));
