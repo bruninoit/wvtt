@@ -64,7 +64,7 @@ class main_listener implements EventSubscriberInterface
 			}
 		$this->template->assign_var('PERMISSION_PROFILE', true);
 		//list last 5
-		$sql_list = "SELECT tt.topic_id, tt.topic_title, wvtt.date
+		$sql_list = "SELECT tt.topic_id, tt.topic_title, wvtt.date, ft.forum_id
 	 	FROM " . FORUMS_TABLE . " ft, " . TOPICS_TABLE . " tt, " . $this->wvtt_table . " wvtt
 	 	WHERE tt.topic_moved_id = 0
 	 	AND tt.topic_visibility=1
@@ -74,6 +74,7 @@ class main_listener implements EventSubscriberInterface
 	 	GROUP BY wvtt.topic_id
 	 	ORDER BY wvtt.date DESC LIMIT 0,20";
 		$sql_list_query = $this->db->sql_query($sql_list);
+			$nn=1;
 			while ($sql_list = $this->db->sql_fetchrow($sql_list_query))
     			{
     			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1)
@@ -82,6 +83,11 @@ class main_listener implements EventSubscriberInterface
     			}else{
     			$true=false;
     			}
+    			if($nn>=6)
+    			{
+    			$true=false;
+    			}
+    			$nn++;
     			$topic_id = $sql_list['topic_id'];
     			$topic_title = $sql_list['topic_title'];
     			$url = "{$this->root_path}viewtopic.{$this->phpEx}?t={$topic_id}";
