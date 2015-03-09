@@ -1,9 +1,9 @@
 <!-- IF PERMISSION_PROFILE -->
-<h3>{L_WVTT_TITLE}</h3>
+<h3>{L_WVTT_PROFILE}</h3>
 <p>
 <!-- BEGIN wvtt_list -->
 <span>
-<!-- IF {wvtt_list.TOPIC_TITLE} --><a href="{wvtt_list.URL}">{wvtt_list.TOPIC_TITLE}</a><!-- IF PERMISSION_POPUP --> ({wvtt_list.DATE})<!-- ENDIF --><br /><!-- ENDIF -->
+<!-- IF wvtt_list.TOPIC_TITLE --><a href="{wvtt_list.URL}">{wvtt_list.TOPIC_TITLE}</a><!-- IF PERMISSION_POPUP --> ({wvtt_list.DATE})<!-- ENDIF --><br /><!-- ENDIF -->
 </span> 
 <!-- END wvtt_list -->
 </p>
