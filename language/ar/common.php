@@ -17,6 +17,7 @@ if (empty($lang) || !is_array($lang))
 }
 $lang = array_merge($lang, array(
 	'WVTT_TITLE'			=> 'من قرأ هذا الموضوع',
+	'WVTT_PROFILE'			=> 'Last topics visited',
         'EXTENSION_BY'			=> 'الإضافة بواسطة ',
         'ACL_U_WVTT'		=> 'يستطيع مُشاهدة الإضافة : من قرأ هذا الموضوع',
 	'ACL_U_WVTT_POPUP'		=> 'Can view the dates of who visited a topic', 
