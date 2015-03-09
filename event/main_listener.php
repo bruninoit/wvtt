@@ -55,8 +55,8 @@ class main_listener implements EventSubscriberInterface
 	}
 	public function profile_list_wvtt($event)
 	{
-	$user_id = $event['profile_fields']['user_id'];
-	if($this->auth->acl_get('u_wvtt_profile'))
+    	$member = $event['member'];
+	$user_id = (int) $member['user_id'];	if($this->auth->acl_get('u_wvtt_profile'))
 		{
 		if($this->auth->acl_get('u_wvtt_popup'))
 			{
@@ -74,12 +74,13 @@ class main_listener implements EventSubscriberInterface
 	 	GROUP BY wvtt.topic_id
 	 	ORDER BY wvtt.date DESC LIMIT 0,20";
 		$sql_list_query = $this->db->sql_query($sql_list);
-			$nn=1;
+			$nn=0;
 			while ($sql_list = $this->db->sql_fetchrow($sql_list_query))
     			{
     			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1)
     			{
     			$true=true;
+                $nn++;
     			}else{
     			$true=false;
     			}
@@ -87,7 +88,6 @@ class main_listener implements EventSubscriberInterface
     			{
     			$true=false;
     			}
-    			$nn++;
     			$topic_id = $sql_list['topic_id'];
     			$topic_title = $sql_list['topic_title'];
     			$url = "{$this->root_path}viewtopic.{$this->phpEx}?t={$topic_id}";
