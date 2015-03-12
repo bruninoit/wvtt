@@ -1,0 +1,16 @@
+<!-- IF PERMISSION_VIEW -->
+    <div class="stat-block">
+        <h3>{L_WVTT_TITLE}</h3>
+        <p>
+            <!-- IF PERMISSION_POPUP -->
+             <a href="{URL_POPUP}" onclick="window.open(this.href,'','statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=1000,height=600'); return false;">{L_WVTT_DETAILS}</a>
+            <!-- ENDIF -->
+            <!-- BEGIN wvtt_list -->
+            &nbsp;&nbsp;
+            <span>
+                <a href="{wvtt_list.URL}" "{wvtt_list.USERNAME_COLOUR}">{wvtt_list.USERNAME}</a>
+            </span><!-- IF PERMISSION_COUNT --> ({wvtt_list.VISITS})<!-- ENDIF -->, 
+            <!-- END wvtt_list -->
+        </p>
+    </div>
+<!-- ENDIF -->
