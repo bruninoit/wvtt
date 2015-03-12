@@ -37,6 +37,8 @@ class main_listener implements EventSubscriberInterface
 	protected $phpEx;
 	/** @var \phpbb\auth\auth */
 	protected $auth;
+    /** @var \phpbb\controller\helper */
+    protected $controller_helper;
 	
 	/**
 	* Constructor
@@ -44,8 +46,9 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper	$helper		Controller helper object
 	* @param \phpbb\template			$template	Template object
 	*/
-	public function __construct(\phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table, \phpbb\auth\auth $auth)	{
-		$this->template = $template;
+	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, \phpbb\user $user, $root_path, $phpEx, $wvtt_table, \phpbb\auth\auth $auth)	{
+        $this->controller_helper = $controller_helper;
+        $this->template = $template;
 		$this->db = $db;
 		$this->user = $user;
 		$this->wvtt_table = $wvtt_table;
@@ -203,8 +206,8 @@ class main_listener implements EventSubscriberInterface
 		{
 		$this->template->assign_var('PERMISSION_COUNT', true);
 		}
-	$url_popup="{$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}";
-	$this->template->assign_var('URL_POPUP', $url_popup);
+	// $url_popup="{$this->root_path}app.{$this->phpEx}/wvtt/{$topic_id}";
+	   $this->template->assign_var('URL_POPUP', $this->controller_helper->route('bruninoit_wvtt_controller', array('topic_id' => $topic_id)));
     }
     }
 }
