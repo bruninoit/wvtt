@@ -17,10 +17,10 @@ if (empty($lang) || !is_array($lang))
 }
 $lang = array_merge($lang, array(
 	'WVTT_TITLE'			=> 'من قرأ هذا الموضوع',
-	'WVTT_PROFILE'			=> 'Last topics visited',
+	'WVTT_PROFILE'			=> 'آخر المواضيع التي قراءها',
         'EXTENSION_BY'			=> 'الإضافة بواسطة ',
-        'ACL_U_WVTT'		=> 'يستطيع مُشاهدة الإضافة : من قرأ هذا الموضوع',
-	'ACL_U_WVTT_POPUP'		=> 'Can view the dates of who visited a topic', 
- 	'ACL_U_WVTT_COUNT'		=> 'Can view topics visits number for each user',
- 	'ACL_U_WVTT_PROFILE'		=> 'Can view last topics visited by users (in profiles)'
+        'ACL_U_WVTT'			=> 'يستطيع مُشاهدة الإضافة : من قرأ هذا الموضوع',
+        'ACL_U_WVTT_POPUP'		=> 'يستطيع مُشاهدة التاريخ في الإضافة : من قرأ هذا الموضوع',
+        'ACL_U_WVTT_COUNT'		=> 'يستطيع مُشاهدة عدد مشاهدات الموضوع لكل عضو',
+        'ACL_U_WVTT_PROFILE'		=> 'يستطيع مُشاهدة "آخر المواضيع التي قراءها" (في الملف الشخصي)'
 ));
