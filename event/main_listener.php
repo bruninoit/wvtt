@@ -67,7 +67,7 @@ class main_listener implements EventSubscriberInterface
 			}
 		$this->template->assign_var('PERMISSION_PROFILE', true);
 		//list last 5
-		$sql_list = "SELECT tt.topic_id, tt.topic_title, wvtt.date, ft.forum_id
+		$sql_list = "SELECT tt.topic_id, tt.topic_title, ft.forum_id
 	 	FROM " . FORUMS_TABLE . " ft, " . TOPICS_TABLE . " tt, " . $this->wvtt_table . " wvtt
 	 	WHERE tt.topic_moved_id = 0
 	 	AND tt.topic_visibility=1
@@ -94,7 +94,16 @@ class main_listener implements EventSubscriberInterface
     			$topic_id = $sql_list['topic_id'];
     			$topic_title = $sql_list['topic_title'];
     			$url = "{$this->root_path}viewtopic.{$this->phpEx}?t={$topic_id}";
-    			$date = $this->user->format_date($sql_list['date']);
+    			//$date = $this->user->format_date($sql_list['date']);
+			$date = "SELECT date
+    			FROM " . $this->wvtt_table . "
+    			WHERE  topic_id = " . $topic_id . "
+    			AND  user_id = " . $user_id . "
+        		ORDER BY date DESC";
+    			$date_query = $this->db->sql_query($date);
+    			$date_array = $this->db->sql_fetchrow($date_query);
+        		$date = $date_array['date'];
+        		$date = $this->user->format_date($date);
 			$this->template->assign_block_vars('wvtt_list',array(
 			'TRUE'				=> $true,
 			'TOPIC_TITLE'			=> $topic_title,
