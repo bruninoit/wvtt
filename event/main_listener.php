@@ -180,8 +180,8 @@ class main_listener implements EventSubscriberInterface
     	$username = $list['username'];
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
-    	$date = $list['date'];
-    	$date = $this->user->format_date($date);
+    	//$date = $list['date'];
+    	//$date = $this->user->format_date($date);
     	
     if($this->auth->acl_get('u_wvtt_count'))
 	{
@@ -200,7 +200,7 @@ class main_listener implements EventSubscriberInterface
 	'USERNAME_COLOUR'	        => $user_colour,
 	'VISITS'			=> $visits,
 	'URL'				=> $url,
-	'DATE'				=> $date
+	//'DATE'				=> $date
 	));
     }//permission end
 	if($this->auth->acl_get('u_wvtt'))
