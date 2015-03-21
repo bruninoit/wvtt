@@ -168,7 +168,7 @@ class main_listener implements EventSubscriberInterface
     //list
   if($this->auth->acl_get('u_wvtt'))
     { //permission start
-    $query = "SELECT w.*, u.*
+    $query = "SELECT w.user_id, w.topic_id, u.username, u.user_colour, u.user_id, COUNT(w.user_id) AS total
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
 	 AND w.user_id=u.user_id
@@ -185,12 +185,13 @@ class main_listener implements EventSubscriberInterface
     	
     if($this->auth->acl_get('u_wvtt_count'))
 	{
-    	$cont = "SELECT COUNT(user_id) AS total
-    	FROM " . $this->wvtt_table . "
-    	WHERE  topic_id = " . $topic_id . "
-    	AND  user_id = " . $user_id . "";
-    	$result = $this->db->sql_query($cont);
-    	$visits = (int) $this->db->sql_fetchfield('total');
+    	//$cont = "SELECT COUNT(user_id) AS total
+    	//FROM " . $this->wvtt_table . "
+    	//WHERE  topic_id = " . $topic_id . "
+    	//AND  user_id = " . $user_id . "";
+    	//$result = $this->db->sql_query($cont);
+    	//$visits = (int) $this->db->sql_fetchfield('total');
+    	$visits = (int) $list['total'];
 	}else{
 	$visits = null;	
 	}
