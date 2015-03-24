@@ -42,8 +42,8 @@ $lang = array_merge($lang, array(
 	'WVTT_TITLE'		=> 'Qui a vu ce sujet',
 	'WVTT_PROFILE'	=> 'Derniers sujets vus',
 	'EXTENSION_BY'	=> 'Extension créée par',
-	'ACL_U_WVTT'		=> 'Peut voir qui a vu un sujet.',
-	'ACL_U_WVTT_POPUP'		=> 'Peut voir à quelles dates les sujets ont été vus.',
-	'ACL_U_WVTT_COUNT'		=> 'Peut voir le nombre de vues des sujets pour chaque utilisateur.',
-	'ACL_U_WVTT_PROFILE'		=> 'Peut voir les derniers sujets vus par les utilisateurs (dans les profils).'
+	'ACL_U_WVTT'		=> 'Peut voir qui a vu un sujet',
+	'ACL_U_WVTT_POPUP'		=> 'Peut voir à quelles dates les sujets ont été vus',
+	'ACL_U_WVTT_COUNT'		=> 'Peut voir le nombre de vues des sujets pour chaque utilisateur',
+	'ACL_U_WVTT_PROFILE'		=> 'Peut voir les derniers sujets vus par les utilisateurs (dans les profils)',
 ));
