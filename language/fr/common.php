@@ -4,7 +4,7 @@
 * @package Who Visited This Topic
 * @copyright (c) 2014 brunino
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-* French translation by Draky (http://www.parigotmanchot.fr/)& Galixte (http://www.galixte.com)
+* French translation by Draky (http://www.parigotmanchot.fr/) & Galixte (http://www.galixte.com)
 *
 
 */
