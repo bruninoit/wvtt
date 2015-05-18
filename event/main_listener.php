@@ -95,12 +95,12 @@ class main_listener implements EventSubscriberInterface
     			$topic_title = $sql_list['topic_title'];
     			$url = "{$this->root_path}viewtopic.{$this->phpEx}?t={$topic_id}";
     			//$date = $this->user->format_date($sql_list['date']);
-			$date = "SELECT date
+			$dates = "SELECT date
     			FROM " . $this->wvtt_table . "
     			WHERE  topic_id = " . $topic_id . "
     			AND  user_id = " . $user_id . "
         		ORDER BY date DESC";
-    			$date_query = $this->db->sql_query($date);
+    			$date_query = $this->db->sql_query($dates);
     			$date_array = $this->db->sql_fetchrow($date_query);
         		$date = $date_array['date'];
         		$date = $this->user->format_date($date);
