@@ -2,7 +2,7 @@
 /**
 *
 * @package Who Visit This Topic
-* @copyright (c) 2013 Bruninoit
+* @copyright (c) 2015 Bruninoit
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -74,13 +74,16 @@ class main_listener implements EventSubscriberInterface
 	 	AND wvtt.user_id=" . $user_id . "
 	 	AND wvtt.topic_id=tt.topic_id
 	 	AND ft.forum_id=tt.forum_id
-	 	GROUP BY wvtt.topic_id
-	 	ORDER BY wvtt.date DESC LIMIT 0,20";
+	 	ORDER BY wvtt.date DESC LIMIT 0,40";
 		$sql_list_query = $this->db->sql_query($sql_list);
 			$nn=0;
+$arr = array();
 			while ($sql_list = $this->db->sql_fetchrow($sql_list_query))
     			{
-    			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1)
+$id = $sql_list['topic_id'];
+if(isset($arr[$id])) $true=false; else $true=true;
+$arr[$id] = true;
+    			if ($this->auth->acl_get('f_read', $sql_list['forum_id']) == 1 and $true)
     			{
     			$true=true;
                 $nn++;
