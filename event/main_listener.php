@@ -171,7 +171,7 @@ $arr[$id] = true;
     //list
   if($this->auth->acl_get('u_wvtt'))
     { //permission start
-    $query = "SELECT w.user_id, w.topic_id, u.username, u.user_colour, u.user_id, COUNT(w.user_id) AS total
+    $query = "SELECT w.user_id, w.topic_id, u.username, u.user_colour, u.user_id, u.user_type, COUNT(w.user_id) AS total
 	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
 	 WHERE w.topic_id = " . $topic_id . "
 	 AND w.user_id=u.user_id
@@ -180,6 +180,10 @@ $arr[$id] = true;
   $list_query = $this->db->sql_query($query);
   while ($list = $this->db->sql_fetchrow($list_query))
     {
+ if($list['user_type'] == 2 and !$this->auth->acl_get('a_'))
+{
+continue;
+}
     	$username = $list['username'];
 	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
     	$user_id = $list['user_id'];
