@@ -1,0 +1,12 @@
+<!-- IF PERMISSION_PROFILE -->
+<div class="panel bg1">
+	<div class="inner">
+<h3>{L_WVTT_PROFILE}</h3>
+<div class="column1">
+<dl>
+<!-- BEGIN wvtt_list -->
+<!-- IF wvtt_list.TRUE --><dd><a href="{wvtt_list.URL}">{wvtt_list.TOPIC_TITLE}</a><!-- IF PERMISSION_POPUP --> ({wvtt_list.DATE})<!-- ENDIF --></dd><!-- ENDIF -->
+<!-- END wvtt_list -->
+</dl>
+</div></div></div>
+<!-- ENDIF -->

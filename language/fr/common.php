@@ -1,12 +1,12 @@
 <?php
 /**
 *
-* @package Who Visited This Topic
-* @copyright (c) 2014 brunino
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-* French translation by Draky (http://www.parigotmanchot.fr/) & Galixte (http://www.galixte.com)
+* Who Visited This Topic extension for the phpBB Forum Software package.
+* French translation by Draky (http://www.parigotmanchot.fr) & Galixte (http://www.galixte.com)
 *
-
+* @copyright (c) 2015 brunino
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
 */
 
 /**
@@ -39,11 +39,12 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'WVTT_TITLE'		=> 'Qui a vu ce sujet',
-	'WVTT_PROFILE'	=> 'Derniers sujets vus',
-	'EXTENSION_BY'	=> 'Extension créée par',
 	'ACL_U_WVTT'		=> 'Peut voir qui a vu un sujet.',
-	'ACL_U_WVTT_POPUP'		=> 'Peut voir à quelles dates les sujets ont été vus.',
 	'ACL_U_WVTT_COUNT'		=> 'Peut voir le nombre de vues des sujets pour chaque utilisateur.',
+	'ACL_U_WVTT_POPUP'		=> 'Peut voir à quelles dates les sujets ont été vus.',
 	'ACL_U_WVTT_PROFILE'		=> 'Peut voir les derniers sujets vus par les utilisateurs (dans les profils).',
+	'EXTENSION_BY'		=> 'Extension créée par',
+	'WVTT_DETAILS'		=> 'Voir les détails',
+	'WVTT_PROFILE'		=> 'Derniers sujets vus',
+	'WVTT_TITLE'		=> 'Qui a vu ce sujet',
 ));
