@@ -1,16 +1,10 @@
-<!-- IF PERMISSION_VIEW -->
+<!-- IF S_DISPLAY_VISITED_TOPICS -->
 <h3>
-<!-- IF PERMISSION_POPUP -->
-<a href="{URL_POPUP}" onclick="window.open(this.href,'','statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=800,height=500'); return false;">
-<!-- ENDIF -->
-{L_WVTT_TITLE}
-<!-- IF PERMISSION_POPUP --></a><!-- ENDIF -->
+	<!-- IF S_ENABLE_POPUP --><a href="{URL_POPUP}" onclick="popup(this.href, 800, 500, '_wvtt'); return false;"><!-- ENDIF -->{L_WVTT_TITLE}<!-- IF S_ENABLE_POPUP --></a><!-- ENDIF -->
 </h3>
 <p>
-<!-- BEGIN wvtt_list -->
-<span>
-<a href="{wvtt_list.URL}" "{wvtt_list.USERNAME_COLOUR}">{wvtt_list.USERNAME}</a>
-</span><!-- IF PERMISSION_COUNT --> ({wvtt_list.VISITS})<!-- ENDIF --><!-- IF not wvtt_list.S_LAST_ROW -->, <!-- ENDIF -->
-<!-- END wvtt_list -->
+	<!-- BEGIN userrow -->
+	<span>{userrow.USERNAME_FULL}</span><!-- IF S_DISPLAY_COUNTER --> ({userrow.TOPIC_VISITS})<!-- ENDIF --><!-- IF not userrow.S_LAST_ROW -->, <!-- ENDIF -->
+	<!-- END userrow -->
 </p>
 <!-- ENDIF -->

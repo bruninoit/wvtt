@@ -1,12 +1,14 @@
-<!-- IF PERMISSION_PROFILE -->
-<div class="panel bg1">
+<!-- IF S_DISPLAY_VISITED_TOPICS -->
+<div class="panel bg2">
 	<div class="inner">
-<h3>{L_WVTT_PROFILE}</h3>
-<div class="column1">
-<dl>
-<!-- BEGIN wvtt_list -->
-<!-- IF wvtt_list.TRUE --><dd><a href="{wvtt_list.URL}">{wvtt_list.TOPIC_TITLE}</a><!-- IF PERMISSION_POPUP --> ({wvtt_list.DATE})<!-- ENDIF --></dd><!-- ENDIF -->
-<!-- END wvtt_list -->
-</dl>
-</div></div></div>
+		<h3>{L_WVTT_PROFILE}</h3>
+		<div class="column1">
+		<dl>
+			<!-- BEGIN topicrow -->
+			<dd><a href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a><!-- IF S_LAST_VISIT_TIME --> ({topicrow.LAST_VISIT_TIME})<!-- ENDIF --></dd>
+			<!-- END topicrow -->
+		</dl>
+		</div>
+	</div>
+</div>
 <!-- ENDIF -->

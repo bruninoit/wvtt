@@ -1,100 +1,103 @@
 <?php
 /**
 *
-* @package Who Visited This Topic
-* @copyright (c) 2015 BruninoIt
+* @package Who Visit This Topic
+* @copyright (c) 2016 ABDev
+* @copyright (c) 2015 Bruninoit
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+/**
+* @namespace
+*/
 namespace bruninoit\wvtt\controller;
+
+/**
+* Just do it
+*/
 class main
 {
-  protected $auth;
-	protected $template;
-	protected $db;
-	protected $wvtt_table;
-	protected $user;
-    protected $helper;
+	/** @var \phpbb\auth\auth */
+	protected $auth;
 
-	public function __construct(\phpbb\template\template $template, \phpbb\db\driver\driver_interface $db, $wvtt_table, \phpbb\auth\auth $auth, \phpbb\user $user, \phpbb\controller\helper $helper)
-    {
-		$this->template = $template;
-		$this->db = $db;
-		$this->wvtt_table = $wvtt_table;
+	/** @var \phpbb\controller\helper */
+	protected $controller_helper;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\template\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var string table_prefix */
+	protected $table_prefix;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\auth\auth                     $auth                Authentication object
+	* @param \phpbb\controller\helper             $controller_helper   Controller helper object
+	* @param \phpbb\db\driver\driver_interface    $db                  Database object
+	* @param \phpbb\template\template             $template            Template object
+	* @param \phpbb\user                          $user                User object
+	* @param string                               $table_prefix        table_prefix
+	* @access public
+	*/
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\template\template $template, \phpbb\user $user, $table_prefix)
+	{
 		$this->auth = $auth;
+		$this->controller_helper = $controller_helper;
+		$this->db = $db;
+		$this->template = $template;
 		$this->user = $user;
-        $this->helper = $helper;
+		$this->table_prefix = $table_prefix;
 	}
-    
+
+	/**
+	 * Show details popup
+	 *
+	 * @param object $topic_id The topic id
+	 * @return null
+	 * @access public
+	 */
 	public function handle($topic_id)
 	{
-  	$page_name=$this->user->lang['WVTT_TITLE'];
-  	
-    //content start
-   //topic title
-    $topic_query = "SELECT topic_title
-	 FROM " . TOPICS_TABLE . "
-	 WHERE topic_id = " . $topic_id . "";
-   $topic_query_g = $this->db->sql_query($topic_query);
-   $topic_query_arr = $this->db->sql_fetchrow($topic_query_g);
-   $topic_title = $topic_query_arr['topic_title'];
-   $this->template->assign_var('TOPIC_TITLE', $topic_title);
+		$sql = 'SELECT topic_title
+			FROM ' . TOPICS_TABLE . '
+			WHERE topic_id = ' . (int) $topic_id;
+		$result = $this->db->sql_query($sql);
+		$this->template->assign_var('TOPIC_TITLE', (string) censor_text($this->db->sql_fetchfield('topic_title')));
+		$this->db->sql_freeresult($result);
 
-   
-   //list
-    $query = "SELECT w.*, u.*
-	 FROM " . $this->wvtt_table . " w, " . USERS_TABLE . " u
-	 WHERE w.topic_id = " . $topic_id . "
-	 AND w.user_id=u.user_id
-	 GROUP BY w.user_id";
-  $list_query = $this->db->sql_query($query);
-  while($list = $this->db->sql_fetchrow($list_query))
+		$sql = 'SELECT w.user_id, MAX(w.date) AS visit_date, u.username, u.user_colour, COUNT(w.user_id) AS user_visits
+			FROM ' . $this->table_prefix . 'wvtt w, ' . USERS_TABLE . ' u
+			WHERE w.topic_id = ' . (int) $topic_id . '
+				AND w.user_id = u.user_id
+			GROUP BY w.user_id';
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
     {
-    $username = $list['username'];
-	$user_colour = ($list['user_colour']) ? ' style="color:#' . $list['user_colour'] . '" class="username-coloured"' : '';
-    	$user_id = $list['user_id'];
-    if($this->auth->acl_get('u_wvtt_count'))
-	{
-    	$cont = "SELECT COUNT(user_id) AS total
-    	FROM " . $this->wvtt_table . "
-    	WHERE  topic_id = " . $topic_id . "
-    	AND  user_id = " . $user_id . "";
-    	$result = $this->db->sql_query($cont);
-    	$visits = (int) $this->db->sql_fetchfield('total');
-	}else{
-	$visits = null;	
-	}
-   
-	
-        $date = "SELECT date
-    	FROM " . $this->wvtt_table . "
-    	WHERE  topic_id = " . $topic_id . "
-    	AND  user_id = " . $user_id . "
-        ORDER BY date DESC";
-    	$date_query = $this->db->sql_query($date);
-    	$date_array = $this->db->sql_fetchrow($date_query);
-        $date = $date_array['date'];
-        $date = $this->user->format_date($date);
-        
-     $this->template->assign_block_vars('wvtt_list',array(
-	'USERNAME'			=> $username,
-	'USERNAME_COLOUR'	        => $user_colour,
-	'VISITS'			=> $visits,
-	'DATE'				=> $date
-	));
-    }
-	
-	if($this->auth->acl_get('u_wvtt_popup'))
-		{
-		$this->template->assign_var('PERMISSION_VIEW', true);
+			$this->template->assign_block_vars('userrow',array(
+				'USERNAME' => get_username_string('username', $row['user_id'], $row['username'], $row['user_colour']),
+				'USERNAME_COLOUR' => get_username_string('colour', $row['user_id'], $row['username'], $row['user_colour']),
+				'USERNAME_FULL' => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+
+				'TOPIC_VISITS' => $row['user_visits'],
+				'LAST_VISIT_TIME' => $this->user->format_date($row['visit_date']),
+
+				'U_USERNAME' => get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),
+			));
 		}
-	if($this->auth->acl_get('u_wvtt_count'))
-		{
-		$this->template->assign_var('PERMISSION_COUNT', true);
-		}
-    //content end
-    
-  	
-		return $this->helper->render('wvtt_popup.html', $page_name);
+		$this->db->sql_freeresult($result);
+
+		// switches
+		$this->template->assign_var('S_DISPLAY_VISITED_TOPICS', $this->auth->acl_get('u_wvtt_popup'));
+		$this->template->assign_var('S_DISPLAY_COUNTER', $this->auth->acl_get('u_wvtt_count'));
+
+		return $this->controller_helper->render('wvtt_popup.html', $this->user->lang['WVTT_TITLE']);
 	}
 }
