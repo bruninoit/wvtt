@@ -4,22 +4,23 @@ services:
     bruninoit.wvtt.controller:
         class: bruninoit\wvtt\controller\main
         arguments:
-            - @template
-            - @dbal.conn
-            - %bruninoit.wvtt.tables.wvtt%
             - @auth
-            - @user
             - @controller.helper
+            - @dbal.conn
+            - @template
+            - @user
+            - %core.table_prefix%
     bruninoit.wvtt.listener:
         class: bruninoit\wvtt\event\main_listener
         arguments:
+            - @auth
+            - @content.visibility
             - @controller.helper
-            - @template
             - @dbal.conn
+            - @template
             - @user
             - %core.root_path%
             - %core.php_ext%
-            - %bruninoit.wvtt.tables.wvtt%
-            - @auth
+            - %core.table_prefix%
         tags:
             - { name: event.listener }
